@@ -400,31 +400,430 @@ int main()
 //思路1：遍历第一遍知道有几个，遍历第二遍找到倒数第几个的位置
 //思路2：快慢指针，fast先走k步，然后fast和slow指针再一起走
 
-struct ListNode
-{
-	int val;
-	struct ListNode* next;
-};
-struct ListNode* FindKthToTail(struct ListNode* pListHead, int k)
-{
-	if (pListHead)
-	{
-		return NULL;
-	}
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode* next;
+//};
+//struct ListNode* FindKthToTail(struct ListNode* pListHead, int k)
+//{
+//	if (pListHead)
+//	{
+//		return NULL;
+//	}
+//
+//	struct ListNode* slow, * fast;
+//	slow = fast = pListHead;
+//	while (k--)						//--k	循环k-1次		k--		循环了k次
+//	{
+//		//大于链表的长度
+//		if (fast == NULL)
+//			return NULL;
+//		fast = fast->next;
+//	}
+//	while (fast)
+//	{
+//		slow = slow->next;
+//		fast = fast->next;
+//	}
+//	return slow;
+//}
 
-	struct ListNode* slow, * fast;
-	slow = fast = pListHead;
-	while (k--)						//--k	循环k-1次		k--		循环了k次
-	{
-		//大于链表的长度
-		if (fast == NULL)
-			return NULL;
-		fast = fast->next;
-	}
-	while (fast)
-	{
-		slow = slow->next;
-		fast = fast->next;
-	}
-	return slow;
-}
+
+
+//作业			合并两个有序链表
+//将两个升序链表合并为一个新的升序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode* next;
+//};
+//struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2)
+//{
+//	struct ListNode* head = NULL, * tail = NULL;
+//	//如果其中一个链表为NULL，就返回另一个
+//	if (l1 == NULL)
+//		return l2;
+//	if (l2 == NULL)
+//		return l1;
+//
+//	//先做头
+//	if (l1->val < l2->val)
+//	{
+//		head = tail = l1;
+//		l1 = l1->next;
+//	}
+//	else
+//	{
+//		head = tail = l2;
+//		l2 = l2->next;
+//	}
+//
+//	//再尾插
+//	while (l1 && l2)
+//	{
+//		if (l1->val < l2->val)
+//		{
+//
+//			tail->next = l1;
+//			tail = tail->next;
+//			l1 = l1->next;
+//		}
+//		else
+//		{
+//
+//			tail->next = l2;
+//			tail = tail->next;
+//			l2 = l2->next;
+//		}
+//	}
+//	if (l1 != NULL)
+//	{
+//		tail->next = l1;
+//	}
+//	else
+//	{
+//		tail->next = l2;
+//	}
+//	return head;
+//}
+
+
+//改成具有哨兵位的头
+//struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2)
+//{
+//	struct ListNode* head = NULL, * tail = NULL;
+//	//如果其中一个链表为NULL，就返回另一个
+//	if (l1 == NULL)
+//		return l2;
+//	if (l2 == NULL)
+//		return l1;
+//
+//	//带一个哨兵位的头节点
+//	head = tail = (struct ListNode*)malloc(sizeof(struct ListNode));
+//
+//
+//	//再尾插
+//	while (l1 && l2)
+//	{
+//		if (l1->val < l2->val)
+//		{
+//
+//			tail->next = l1;
+//			tail = tail->next;
+//			l1 = l1->next;
+//		}
+//		else
+//		{
+//
+//			tail->next = l2;
+//			tail = tail->next;
+//			l2 = l2->next;
+//		}
+//	}
+//	if (l1 != NULL)
+//	{
+//		tail->next = l1;
+//	}
+//	else
+//	{
+//		tail->next = l2;
+//	}
+//	struct ListNode* list = head->next;
+//	free(head);
+//	return list;
+//}
+
+//力扣链接：https://leetcode.cn/problems/he-bing-liang-ge-pai-xu-de-lian-biao-lcof/submissions/
+
+
+
+//作业		链表分割
+//现有一链表的头指针ListNode* pHead,给一定值x，编写一段代码将所有小于x的结点排在其余结点之前，
+//且不能改变原来的数据顺序，返回重新排列后的链表头指针
+
+//C++兼容C的语法
+
+//struct ListNode
+//{
+//	int val;
+//	struct ListNode* next;
+//};
+//struct ListNode* partition(struct ListNode* pHead, int x)
+//{
+//	struct ListNode* lessHead, * lessTail, * greaterHead, * greaterTail;
+//	//开一个哨兵位头节点，方便尾插
+//	lessHead = lessTail = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	lessTail->next = NULL;
+//	greaterHead = greaterTail = (struct ListNode*)malloc(sizeof(struct ListNode));
+//	greaterTail->next = NULL;
+//
+//	struct ListNode* cur = pHead;
+//	while (cur)
+//	{
+//		if (cur->val < x)
+//		{
+//			lessTail->next = cur;
+//			lessTail = cur;
+//		}
+//		else
+//		{
+//			greaterTail->next = cur;
+//			greaterTail = cur;
+//		}
+//		cur = cur->next;
+//	}
+//	greaterTail->next = NULL;
+//	lessTail->next = greaterHead->next;
+//	struct ListNode* newHead = lessHead->next;
+//	free(lessHead);
+//	free(greaterHead);
+//	return newHead;
+//}
+
+//力扣链接：https://leetcode.cn/problems/partition-list-lcci/submissions/
+//牛客链接：https://www.nowcoder.com/questionTerminal/0e27e0b064de4eacac178676ef9c9d70
+
+
+
+//作业			链表的回文结构
+//对于一个链表，请设计一个时间复杂度为O（n）额外空间复杂度为O（1）的算法，判断其是否为回文结构。
+//给定一个链表的头指针A，请返回一个bool值，代表其是否为回文结构。保证链表长度小于等于900.
+//struct ListNode {
+//	int val;
+//	struct ListNode* next;
+//}; 
+//
+//struct ListNode* chkPalindrome(struct ListNode* A)
+//{
+//	struct ListNote* mid = middleNode(A);
+//	struct ListNote* rHead = reverseList(mid);
+//
+//	struct ListNode* curA = A;
+//	struct ListNode* curR = rHead;
+//	while (curA && curR)
+//	{
+//		if (curA->val != curR->val)
+//		{
+//			return 0;
+//		}
+//		else
+//		{
+//			curA = curA->next;
+//			curR = curR->next;
+//		}
+//	}
+//	return 1;
+//}
+
+
+
+//作业			相交链表
+//给你两个单链表的头节点headA和headB，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回NULL。
+//1.判断两个链表是否相交
+//2.如果相交，求交点
+//思路1：依次取A链表中的每个节点跟B链表中的所有节点比较，如果有地址相同的结点，就是相交，第一个相同的就是交点  暴力求解  穷举法  O（N^2）
+//思路2：先找尾，尾结点相同，就是相交，尾节点不相同，就是不相交。
+//		 再找交点，长的链表先走（长度差）步，再同时走，第一个相同就是交点。
+//#include<stdlib.h>
+//struct ListNode {
+//	int val;
+//	struct ListNode* next;
+//}; 
+//
+//struct ListNode* getIntrsectionNode(struct ListNode* headA, struct ListNode* headB)
+//{
+//	struct ListNode* tailA = headA;
+//	struct ListNode* tailB = headB;
+//	int lenA = 1;
+//	int lenB = 1;
+//	while (tailA->next)
+//	{
+//		lenA++;
+//		tailA = tailA->next;
+//	}
+//	while (tailB->next)
+//	{
+//		lenB++;
+//		tailB = tailB->next;
+//	}
+//	//不相交
+//	if (tailA != tailB)
+//	{
+//		return NULL;
+//	}
+//	int gas = abs(lenA - lenB);			//abs()			求绝对值		#include<stdlib.h>
+//	//长的先走差距步，再同时走找交点
+//	struct ListNode* longList = headA;
+//	struct ListNode* shortList = headA;
+//	if (lenA < lenB)
+//	{
+//		shortList = headA;
+//		longList = headB;
+//	}
+//	while (gas--)
+//	{
+//		longList = longList->next;
+//	}
+//	while (longList != shortList)
+//	{
+//		longList = longList->next;
+//		shortList = shortList->next;
+//	}
+//	return longList;
+//}
+//力扣没通过		不知道哪里有问题
+
+
+
+
+//作业		环形链表
+//给定一个链表，判断链表中是否有环。
+//如果链表中有某个节点，可以通过连续跟踪next指针再次到达，则链表中存在环。
+//为了表示给定链表中的环，我们使用整数pos来表示链表尾连接到链表中的位置（索引从0开始）。如果pos是-1，则在该链表中没有环。
+//注：pos不作为参数进行传递，仅仅是为了标识链表的实际情况。
+//思路1：快慢指针，slow和fast指向链表的开始。slow一次走一步，fast一次走两步。不带环，fast就会为空，带环，fast就会在环里追上slow
+
+//struct ListNode {
+//	int val;
+//	struct ListNode* next;
+//}; 
+//struct ListNode* hasCycle(struct ListNode* head)
+//{
+//	struct ListNode* slow, * fast;
+//	slow = fast = head;
+//	while (fast && fast->next)
+//	{
+//		slow = slow->next;
+//		fast = fast->next->next;
+//		if (slow == fast)
+//		{
+//			//相遇
+//			struct ListNode* meet = slow;
+//			//公式证明，在相遇点出发，和起始点出发，会在入环点相遇
+//			while (meet != head)
+//			{
+//				meet = meet->next;
+//				head = head->next;
+//			}
+//			return meet;
+//		}
+//	}
+//	//不带环
+//	return NULL;
+//}
+
+//slow一次走一步，fast一次走两步，一定会相遇。
+//分析证明：第一步：fast一定是先进环，这时slow走了入环前距离的一半
+//			第二步：随着slow进环，fast已经在环里走了一段，走了多少跟环的大小有关系。
+//			第三步：假设slow进环的时候，slow跟fast的距离是N，fast开始追slow，slow每次走1步，fast每次走2步，它们之间的距离每次减少1步。
+
+
+//如何找入口点
+//第一步：slow走1步，fast走2步，一定会相遇。
+//第二步：一个指针从相遇点开始走，一个指针从链表头开始走，他们会在环的入口点相遇。
+//分析证明：追上相遇过程中，慢指针走的距离：L+X
+//							快指针走的距离：L+N*C+X
+//			且快指针走的路程是慢指针的2倍 ：2（L+X）=L+N*C+X			L=N*C-X			L=(N-1)*C+C-X		所以会相遇
+
+//思路2：先找到交点，在交点处断开，然后变成了上一个题找交点问题
+
+
+
+//作业			复制带随即指针的链表
+//给你一个长度为n的链表，每个节点包含一个额外增加的随机指针random，该指针可以指向链表中的任何结点或空结点
+//构造这个链表的深拷贝。深拷贝应该正好由n个全新节点组成，其中每个新节点的值都设为其对应的原节点的值。
+//新节点的next指针和random指针也都应指向复制链表中的新节点，并使原链表和复制链表中的这些指针能够表示相同的链表状态。
+//复制链表中的指针都不应该指向原链表中的节点
+
+//struct ListNode {
+//	int val;
+//	struct ListNode* next;
+//	struct ListNode* random;
+//};
+//struct ListNode* copyRandomList(struct ListNode* head)
+//{
+//	//1.拷贝节点，插入原节点的后面
+//	struct ListNode* cur = head;
+//	while (cur)
+//	{
+//		struct ListNode* copy = (struct ListNode*)malloc(sizeof(struct ListNode));
+//		copy->val = cur->val;
+//		//插入copy节点
+//		copy->next = cur->next;
+//		cur->next = copy;
+//
+//		cur = copy->next;
+//	}
+//	//2.根据源节点，处理copy节点的random
+//	cur = head;
+//	while (cur)
+//	{
+//		struct ListNode* copy = cur->next;
+//		if (cur->random == NULL)
+//		{
+//			copy->random = NULL;
+//		}
+//		else
+//		{
+//			copy->random = cur->random->next;
+//		}
+//		cur = copy->next;
+//	}
+//	//3.把拷贝节点解下来，链接成新链表
+//	struct ListNode* copyHead = NULL, * copyTail = NULL;
+//	cur = head;
+//	while (cur)
+//	{
+//		struct ListNode* copy = cur->next;
+//		struct ListNode* next = copy->next;
+//
+//		if (copyTail == NULL)
+//		{
+//			copyHead = copyTail = copy;
+//		}
+//		else
+//		{
+//			copyTail->next = copy;
+//			copyTail = copy;
+//		}
+//		cur->next = next;
+//	}
+//}
+
+
+
+
+
+
+
+
+
+
+//双向链表
+//单	双
+//带头	不带头
+//循环	非循环
+
+//1.无头单相非循环链表：结构简单，一般不会单独用来存数据。实际中更多的是作为其他数据结构的子结构，如哈希桶、图的邻接表等等。另外这种结构在笔试面试中出现很多。
+//2.带头双向循环链表：结构最复杂，一般用在单独存储数据。实际中使用的链表数据结构，都是带头双向循环链表。
+//	另外，这个结构虽然结构复杂，但是使用代码实现以后会发现结构会带来很多优势，实现反而简单了，后面我们代码实现了就知道了。
+
+
+
+
+
+//顺序表和链表
+//这两个结构各有优势，很难说谁更优？
+//严格他们两，相辅相成的两个结构
+
+//顺序表优点：	1.支持随机访问。需要随机访问结构支持算法可以很好的适用
+//				2.CPU高速缓存命中率更高
+//顺序表缺点：	1.头部中部插入、删除时间效率低。O（N）
+//				2.连续的物理空间，空间不够了以后需要增容。
+//				a.增容有一定程度的消耗。b.为了避免频繁增容，一般我们都按倍数去增容，用不完可能存在一定的空间浪费。
+
+//链表（双向带头循环链表）的优点：	1.任意位置插入删除，效率高。O（1）	2.按需申请释放空间。
+//链表（双向带头循环链表）的缺点：	1.不支持随机访问。（用下表访问）。意味着：一些排序，二分查找等在这种结构上不适应。
+//									2.链表存储一个值，同时要存链接指针，也有一定的消耗。
+//									3.CPU高速缓存命中率更低

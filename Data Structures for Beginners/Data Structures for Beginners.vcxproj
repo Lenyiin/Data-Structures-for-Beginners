@@ -127,14 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="List.c" />
     <ClCompile Include="SeqList.c" />
     <ClCompile Include="SList.c" />
     <ClCompile Include="test-1-时间复杂度.c" />
     <ClCompile Include="test-2-顺序表和链表.c" />
+    <ClCompile Include="test-List.c" />
     <ClCompile Include="test-SeqList.c" />
     <ClCompile Include="test-SList.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="List.h" />
     <ClInclude Include="SeqList.h" />
     <ClInclude Include="SList.h" />
   </ItemGroup>
