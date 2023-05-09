@@ -128,18 +128,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="List.c" />
+    <ClCompile Include="Queue.c" />
     <ClCompile Include="SeqList.c" />
     <ClCompile Include="SList.c" />
+    <ClCompile Include="Stack.c" />
     <ClCompile Include="test-1-时间复杂度.c" />
     <ClCompile Include="test-2-顺序表和链表.c" />
     <ClCompile Include="test-List.c" />
+    <ClCompile Include="test-Queue.c" />
     <ClCompile Include="test-SeqList.c" />
     <ClCompile Include="test-SList.c" />
+    <ClCompile Include="test-3-栈和队列.c" />
+    <ClCompile Include="test-Stack.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="List.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="SeqList.h" />
     <ClInclude Include="SList.h" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
